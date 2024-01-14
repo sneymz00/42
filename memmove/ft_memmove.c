@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:18:10 by camurill          #+#    #+#             */
-/*   Updated: 2024/01/13 18:14:11 by camurill         ###   ########.fr       */
+/*   Updated: 2024/01/14 11:48:49 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ void	*ft_memmove(void *dest, const void *src, size_t len)
 {
 	int	i;
 
+	if (n < len)
+		len =  n;
+		write(1, "Error", 5);
 	if (dest < src)
 	{
 		i = 0;

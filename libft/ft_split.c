@@ -6,25 +6,26 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:31:10 by camurill          #+#    #+#             */
-/*   Updated: 2024/01/26 03:00:26 by camurill         ###   ########.fr       */
+/*   Updated: 2024/01/26 03:57:29 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
-/*
-static int	ft_countword(char const *str, char c)
+
+static int	ft_count(char const *str, char c)
 {
-	int	i;
 	int	count;
 
-	i = 0;
 	count = 0;
-	while (str[i] != '\0')
+	while (*str)
 	{
-		if (str[i] == c)
-			count++; //swich si es palabra
-		i++;
+		while (*str == c)
+			str++;
+		if (*str)
+			count++;
+		while (*str != c && *str)
+			str++;
 	}
 	return (count);
 }
@@ -32,75 +33,28 @@ static int	ft_countword(char const *str, char c)
 char	**ft_split(char const *s, char c)
 {
 	int		i;
-	int		j;
-	int		count;
+	size_t	count;
 	char	**split;
 
 	i = 0;
-	j = 0;
-	count = 0;
-	split =  malloc((ft_countword(s, c) + 1) * sizeof(char));
+	split = (char **)malloc(sizeof(char *) * (ft_count(s, c) + 1));
 	if (!s || !split)
 		return (0);
 	while (*s)
 	{
-		while (s[i] != '\0' && s[i] == c)
-		{
-			if (s[i] == c)
-				split[j] = ft_substr(s, i, count);
-			i++;
-			count++;
-		}
-		j++;
-	}
-	return (split);
-}*/
-
-#include "libft.h"
-
-static size_t	ft_countword(char const *s, char c)
-{
-	size_t	count;
-
-	if (!*s)
-		return (0);
-	count = 0;
-	while (*s)
-	{
-		while (*s == c)
-			s++;
-		if (*s)
-			count++;
-		while (*s != c && *s)
-			s++;
-	}
-	return (count);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	char	**lst;
-	size_t	word_len;
-	int		i;
-
-	lst = (char **)malloc((ft_countword(s, c) + 1) * sizeof(char *));
-	if (!s || !lst)
-		return (0);
-	i = 0;
-	while (*s)
-	{
-		while (*s == c && *s)
+		while (*s && *s == c)
 			s++;
 		if (*s)
 		{
 			if (!ft_strchr(s, c))
-				word_len = ft_strlen(s);
+				count = ft_strlen(s);
 			else
-				word_len = ft_strchr(s, c) - s;
-			lst[i++] = ft_substr(s, 0, word_len);
-			s += word_len;
+				count = ft_strchr(s, c) - s;
+			split[i] = ft_substr(s, 0, count);
+			s = count + s;
+			i++;
 		}
 	}
-	lst[i] = 0;
-	return (lst);
+	split[i] = 0;
+	return (split);
 }

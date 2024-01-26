@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: camurill <camurill@student.42barcel>       +#+  +:+       +#+        */
+/*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 16:55:06 by camurill          #+#    #+#             */
-/*   Updated: 2024/01/14 17:06:01 by camurill         ###   ########.fr       */
+/*   Created: 2024/01/15 07:47:15 by camurill          #+#    #+#             */
+/*   Updated: 2024/01/20 21:55:50 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-size_t	ft_strlcpy (char *dst, char *src, size_t size)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
-	while (src[i] != '\0' && i < size)
+	while (i < n && (s1[i] != '\0' || s2[i] != '\0'))
 	{
-		dst[i] = src[i];
+		if (s1[i] != s2[i])
+			return ((unsigned char)(s1[i]) - (unsigned char)(s2[i]));
 		i++;
 	}
-	dst[i] = '\0';
-	return ((size_t)(src));
-}
-
-int	main(void)
-{
-	char r[10];
-	size_t i;
-
-	i = ft_strlcpy(r, "Hola", 3);
-	printf("%s\n%zu", r, i);
 	return (0);
 }

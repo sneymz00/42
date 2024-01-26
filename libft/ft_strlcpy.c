@@ -3,35 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: camurill <camurill@student.42barcel>       +#+  +:+       +#+        */
+/*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 16:55:06 by camurill          #+#    #+#             */
-/*   Updated: 2024/01/14 17:06:01 by camurill         ###   ########.fr       */
+/*   Created: 2024/01/18 01:50:28 by camurill          #+#    #+#             */
+/*   Updated: 2024/01/20 22:35:38 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-size_t	ft_strlcpy (char *dst, char *src, size_t size)
+size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
-	while (src[i] != '\0' && i < size)
+	if (dstsize != 0)
 	{
-		dst[i] = src[i];
-		i++;
+		while (src[i] && dstsize - 1 > i)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
 	}
-	dst[i] = '\0';
-	return ((size_t)(src));
-}
-
-int	main(void)
-{
-	char r[10];
-	size_t i;
-
-	i = ft_strlcpy(r, "Hola", 3);
-	printf("%s\n%zu", r, i);
-	return (0);
+	return (ft_strlen(src));
 }

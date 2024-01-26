@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: camurill <camurill@student.42barcel>       +#+  +:+       +#+        */
+/*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 16:55:06 by camurill          #+#    #+#             */
-/*   Updated: 2024/01/14 17:06:01 by camurill         ###   ########.fr       */
+/*   Created: 2024/01/17 23:17:48 by camurill          #+#    #+#             */
+/*   Updated: 2024/01/20 22:13:02 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-size_t	ft_strlcpy (char *dst, char *src, size_t size)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t i;
+	size_t				i;
+	unsigned char		*p1;
+	unsigned char		*p2;
 
 	i = 0;
-	while (src[i] != '\0' && i < size)
+	p1 = (unsigned char *)s1;
+	p2 = (unsigned char *)s2;
+	while (i < n)
 	{
-		dst[i] = src[i];
+		if (p1[i] != p2[i])
+			return (p1[i] - p2[i]);
 		i++;
 	}
-	dst[i] = '\0';
-	return ((size_t)(src));
-}
-
-int	main(void)
-{
-	char r[10];
-	size_t i;
-
-	i = ft_strlcpy(r, "Hola", 3);
-	printf("%s\n%zu", r, i);
 	return (0);
 }
